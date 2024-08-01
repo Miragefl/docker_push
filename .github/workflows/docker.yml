@@ -10,21 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up JDK 8
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: "8"
           distribution: "adopt" # 可以选择合适的JDK发行版，如 zulu, adopt, temurin
+          cache: maven
 
-      - name: Set up Maven
-        uses: actions/setup-java@v3
-        with:
-          java-package: "maven"
-          maven-version: "3.8.6" # 设定需要的Maven版本
-
-      - name: Build with Maven
+      - name: maven build
         run: mvn clean package
 
       - name: Deploy to remote server
